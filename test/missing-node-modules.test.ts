@@ -1,6 +1,6 @@
 import * as tap from 'tap';
 const { test } = tap;
-import * as fs from 'then-fs';
+import * as fs from 'fs';
 
 const apiKey = '123456789';
 const notAuthorizedApiKey = 'notAuthorized';

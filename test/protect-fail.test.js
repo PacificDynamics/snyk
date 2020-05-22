@@ -1,7 +1,6 @@
 var applyPatch = require('../src/lib/protect/apply-patch');
 var path = require('path');
 var fs = require('fs');
-var thenfs = require('then-fs');
 var test = require('tap').test;
 var snyk = require('../src/lib');
 
@@ -38,19 +37,11 @@ test('bad patch file does not apply', function(t) {
     })
     .then(function() {
       // clean up
-      var noop = function() {};
-      var promises = [];
-      promises.push(thenfs.unlink(dir + '/semver.js.orig').catch(noop));
-      promises.push(thenfs.unlink(dir + '/semver.js.rej').catch(noop));
-      promises.push(
-        thenfs.unlink(dir + '/test/big-numbers.js.orig').catch(noop),
-      );
-      promises.push(
-        thenfs.unlink(dir + '/test/big-numbers.js.rej').catch(noop),
-      );
+      fs.unlinkSync(dir + '/semver.js.orig');
+      fs.unlinkSync(dir + '/semver.js.rej');
+      fs.unlinkSync(dir + '/test/big-numbers.js.orig');
+      fs.unlinkSync(dir + '/test/big-numbers.js.rej');
       fs.writeFileSync(dir + '/semver.js', semver);
-
-      return Promise.all(promises);
     })
     .then(function() {
       t.ok('clean up done');

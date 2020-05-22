@@ -1,7 +1,7 @@
 const test = require('tap').test;
 const proxyquire = require('proxyquire');
 const sinon = require('sinon');
-const fs = require('then-fs');
+const fs = require('fs');
 const path = require('path');
 const rimraf = require('rimraf');
 
